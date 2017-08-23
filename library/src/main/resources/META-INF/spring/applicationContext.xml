@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--命名空间和模式文件在创建xml的时候可以选，DTD选项中，不过需要先在pom里加入和spring相关的依赖-->
+
+    <!--applicationContext.xml 用来配置数据源，以及整合spring与mybatis-->
+
+    <!--配置：扫描出controller外的其他bean-->
+    <!--<context:component-scan base-package="" />-->
+</beans>

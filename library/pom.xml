@@ -103,7 +103,7 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
-        <dependency>
+        <dependency><!--logback 的 spring 整合,负责logback随着项目启动-->
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>
             <version>0.1.4</version>

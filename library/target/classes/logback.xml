@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration>
+<configuration scan="true" debug="false"
+               xmlns="http://ch.qos.logback/xml/ns/logback"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback http://ch.qos.logback/xml/ns/logback/logback.xsd">
+    <!-- 这个是根配置文件，一定要有的
+        scan：
+            是当配置文件被修改后会被重新加载
+        scanPeriod:
+            设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，
+            默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+        debug：
+            当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。
+            默认值为false。 -->
+
+    <!--<substitutionProperty name="logbase" value="${catalina.base}/logs/library/" />-->
+    <!-- 日志存放路径
+        上面的标签可以自己定义
+        name：相当于Map的key
+        value：就是map的value
+        ${catalina.base}是tomcat的当前路径
+        /logs：就是tomcat下的日志路径，
+        /ehrlog：如果没有目录会默认创建 -->
+    <!-- 时间戳：
+            这个时间戳可以作为每日日志的名称 -->
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+
+    <property name="log.filePath" value="F:/logs/library"/>
+    <property name="log.pattern" value="%date -| %level [%thread] %logger{50}-%method [%file:%line] -| %msg%n"/>
+    <property name="log.maxFileSize" value="80MB"/>
+    <property name="log.totalSizeCap" value="2GB"/>
+    <property name="log.maxHistory" value="25"/>
+    <!--%logger{50}:数字越大看到的logger类、方法就越精细，不缩写
+        %method:方法-->
+
+    <!--DEBUG-->
+    <appender name="DEBUG_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.filePath}/debug.log</file> <!--当日日志如何保存-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy"> <!--每日日志保存配置-->
+            <fileNamePattern>${log.filePath}/debug/debug.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern><!--非当天日志保存的格式-->
+            <maxFileSize>${log.maxFileSize}</maxFileSize><!--单个日志文件占用的最大内存，超过则自动滚动-->
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap><!--当天该appender下包括滚动的日志占用的最大内存，超过不保存-->
+            <maxHistory>${log.maxHistory}</maxHistory> <!--日志能保存的天数-->
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="INFO_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.filePath}/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.filePath}/info/info.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${log.maxFileSize}</maxFileSize>
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+            <maxHistory>${log.maxHistory}</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="WARN_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.filePath}/warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.filePath}/warn/warn.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${log.maxFileSize}</maxFileSize>
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+            <maxHistory>${log.maxHistory}</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.filePath}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.filePath}/error/error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${log.maxFileSize}</maxFileSize>
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+            <maxHistory>${log.maxHistory}</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FATAL_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.filePath}/fatal.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.filePath}/fatal/fatal.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>${log.maxFileSize}</maxFileSize>
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+            <maxHistory>${log.maxHistory}</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>FATAL</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+    <!--控制台输出-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.kk.base" level="DEBUG">
+        <appender-ref ref="DEBUG_APPENDER" />
+        <appender-ref ref="INFO_APPENDER" />
+        <appender-ref ref="WARN_APPENDER" />
+        <appender-ref ref="ERROR_APPENDER" />
+        <appender-ref ref="FATAL_APPENDER" />
+    </logger>
+
+    <!--有logger了，就不再看root，除非logger设置了addtivity=true，才会交由root里的appender处理
+        如果只有root，则交由root里的appender处理-->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

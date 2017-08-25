@@ -49,9 +49,8 @@
             menu: [{
                 text: '首页内容',
                 items: [
-//                    {id: 'main-menu', text: '顶部导航', href: 'main/menu.php'},
-//                    {id: 'second-menu', text: '二级菜单', href: 'main/second-menu.php'}
-                    {id: 'introduce', text: '搜索页面简介', href: 'http://www.baidu.com'}
+                    {id: 'main-menu', text: '鹿晗首页', href: 'https://baike.baidu.com/item/%E9%B9%BF%E6%99%97/5083717?fr=aladdin'},
+                    {id: 'second-menu', text: '鹿晗微博', href: 'https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2Fn%2FM%25E9%25B9%25BFM%3Fc%3Dspr_qdhz_bd_baidusmt_weibo_s&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3Dtu1wTjq7hIX3VUIWXexucOiBQ32HeMx1eD8AgWDjlLIIgeH14dkyc52tlO_Q4XFAdUN4d6JUsh7EPfRid58n6xXt60t4r9iRJLLJFmnGXWO%26wd%3D%26eqid%3Da8909f3a000252bb00000004599f7c6e&ua=php-sso_sdk_client-0.6.23&_rand=1503624304.5498'}
                 ]
             }]
         }, {
